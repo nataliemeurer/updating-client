@@ -20,7 +20,6 @@ public class SimpleUpdateServerApplication extends Application<SimpleUpdateServe
 
     @Override
     public void run(SimpleUpdateServerConfiguration configuration, Environment environment) {
-
         environment.jersey().register(new AssetVersionResource(configuration.getAdminSecret()));
         environment.jersey().register(new AssetUploadResource(configuration.getAdminSecret()));
         environment.jersey().register(new VersionedStaticFileResource());
