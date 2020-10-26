@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.core.Response;
 
 import java.io.*;
-import java.nio.file.Paths;
 
 import static com.nametag.sample.util.EndpointUtils.assetAndVersionExist;
 
@@ -46,10 +45,7 @@ public class AssetVersionResource implements AssetVersionService {
     }
 
     @Override
-    public Response getAssetVersion(String bearer, String assetId) {
-        if (EndpointUtils.isInvalidAuthHeader(bearer, uploadSecret)) {
-            return EndpointUtils.unauthorizedResponse();
-        }
+    public Response getAssetVersion(String assetId) {
         if (!EndpointUtils.assetExists(assetId)) {
             return EndpointUtils.badRequestResponse("Asset or version does not exist. Please upload an asset first.");
         }

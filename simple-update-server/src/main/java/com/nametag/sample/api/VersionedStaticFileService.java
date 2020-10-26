@@ -14,4 +14,5 @@ public interface VersionedStaticFileService {
     @Path("/{assetId}")
     @Produces(MediaType.TEXT_HTML)
     Response serveAsset(@PathParam("assetId") String assetId);
+
 }

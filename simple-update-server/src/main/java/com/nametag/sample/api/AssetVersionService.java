@@ -16,5 +16,5 @@ public interface AssetVersionService {
 
     @GET
     @Path("/{assetId}")
-    Response getAssetVersion(@HeaderParam("Authorization") String bearer, @PathParam("assetId") String assetId);
+    Response getAssetVersion(@PathParam("assetId") String assetId);
 }
