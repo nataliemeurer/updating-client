@@ -7,7 +7,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Response;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static com.nametag.sample.util.EndpointUtils.assetAndVersionExist;
 
@@ -34,8 +36,8 @@ public class AssetVersionResource implements AssetVersionService {
             fi.createNewFile();
             try (FileWriter out = new FileWriter(fi)) {
                 out.write(assetVersion);
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                log.error("Failed to write an asset version.", ex);
             }
             return EndpointUtils.successResponse();
         } catch (IOException ex) {

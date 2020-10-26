@@ -22,7 +22,7 @@ public class VersionedStaticFileResource implements VersionedStaticFileService {
                                         Paths.get("assets", assetId, version, version + ".html").toFile()
                                 )
                         )) {
-                            return Response.ok().entity(reader.lines().collect(Collectors.joining(""))).build();
+                            return Response.ok().entity(reader.lines().collect(Collectors.joining())).build();
                         } catch (IOException ex) {
                             return Response.serverError().build();
                         }
