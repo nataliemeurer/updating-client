@@ -33,7 +33,19 @@ public class AssetUploadResource implements AssetUploadService {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
         processInputStream(assetId, assetVersion, fileData);
+        createVersionFileIfNonexistent(assetId, assetVersion);
         return EndpointUtils.successResponse();
+    }
+
+    private void createVersionFileIfNonexistent(String assetId, String versionId) {
+        File fi = Paths.get("assets", assetId, "version.txt").toFile();
+        if (!fi.exists()) {
+            try (BufferedWriter out = new BufferedWriter(new FileWriter(fi))) {
+                out.write(versionId);
+            } catch (IOException ex) {
+                log.error("Failed to write version file.", ex);
+            }
+        }
     }
 
     private boolean validParams(String assetId, String assetVersion, FormDataContentDisposition fileMetadata) {
